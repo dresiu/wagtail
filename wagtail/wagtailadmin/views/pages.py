@@ -591,7 +591,7 @@ def move_confirm(request, page_to_move_id, destination_id):
     if not page_to_move.permissions_for_user(request.user).can_move_to(destination):
         raise PermissionDenied
 
-    if request.POST:
+    if request.method == 'POST':
         # any invalid moves *should* be caught by the permission check above,
         # so don't bother to catch InvalidMoveToDescendant
 
@@ -613,7 +613,7 @@ def set_page_position(request, page_to_move_id):
     if not parent_page.permissions_for_user(request.user).can_reorder_children():
         raise PermissionDenied
 
-    if request.POST:
+    if request.method == 'POST':
         # Get position parameter
         position = request.GET.get('position', None)
 
