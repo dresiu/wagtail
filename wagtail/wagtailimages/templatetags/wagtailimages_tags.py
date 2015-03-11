@@ -38,9 +38,17 @@ class ImageNode(template.Node):
         self.output_var_name = output_var_name
         self.attrs = attrs
 
-        if filter_spec not in filters:
-            filters[filter_spec], _ = Filter.objects.get_or_create(spec=filter_spec)
-        self.filter = filters[filter_spec]
+        self._filter_spec = filter_spec
+        self._filter = None
+
+    @property
+    def filter(self):
+        if self._filter is None:
+            if self._filter_spec not in filters:
+                filters[self._filter_spec], _ = Filter.objects.get_or_create(spec=self._filter_spec)
+            self._filter = filters[self._filter_spec]
+
+        return self._filter
 
     def render(self, context):
         try:
