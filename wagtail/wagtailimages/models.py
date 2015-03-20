@@ -346,7 +346,7 @@ class AbstractRendition(models.Model):
     file = models.ImageField(upload_to='images', width_field='width', height_field='height')
     width = models.IntegerField(editable=False)
     height = models.IntegerField(editable=False)
-    focal_point_key = models.CharField(max_length=255, blank=True, default='', editable=False)
+    focal_point_key = models.CharField(max_length=255, null=True, blank=True, default='', editable=False)
 
     @property
     def url(self):
