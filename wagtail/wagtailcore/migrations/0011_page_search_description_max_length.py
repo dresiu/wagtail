@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
             model_name='page',
             name='search_description',
             field=models.TextField(blank=True, max_length=2000)
