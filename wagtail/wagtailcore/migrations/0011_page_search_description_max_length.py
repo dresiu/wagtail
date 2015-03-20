@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='page',
             name='search_description',
-            field=models.TextField(blank=True, max_length=2000)
+            field=models.CharField(blank=True, max_length=2000)
         ),
     ]
