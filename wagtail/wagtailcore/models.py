@@ -407,7 +407,7 @@ class Page(six.with_metaclass(PageBase, MP_Node, ClusterableModel, index.Indexed
 
     def _update_descendant_url_paths(self, old_url_path, new_url_path):
         cursor = connection.cursor()
-        if connection.vendor == 'sqlite':
+        if connection.vendor in ['sqlite', 'oracle']:
             update_statement = """
                 UPDATE wagtailcore_page
                 SET url_path = %s || substr(url_path, %s)
