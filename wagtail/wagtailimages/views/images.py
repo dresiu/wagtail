@@ -214,7 +214,7 @@ def delete(request, image_id):
     if not image.is_editable_by_user(request.user):
         raise PermissionDenied
 
-    if request.POST:
+    if request.method == "POST":
         image.delete()
         messages.success(request, _("Image '{0}' deleted.").format(image.title))
         return redirect('wagtailimages_index')

@@ -161,7 +161,7 @@ def delete(request, document_id):
     if not doc.is_editable_by_user(request.user):
         raise PermissionDenied
 
-    if request.POST:
+    if request.method == "POST":
         doc.delete()
         messages.success(request, _("Document '{0}' deleted.").format(doc.title))
         return redirect('wagtaildocs_index')
