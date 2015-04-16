@@ -210,7 +210,7 @@ def delete(request, content_type_app_name, content_type_model_name, id):
 
     instance = get_object_or_404(model, id=id)
 
-    if request.POST:
+    if request.method == "POST":
         instance.delete()
         messages.success(
             request,
