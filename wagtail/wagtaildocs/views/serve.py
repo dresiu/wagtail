@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from wsgiref.util import FileWrapper
 from django.http import StreamingHttpResponse
+from django.utils.encoding import smart_str
 
 from wagtail.wagtaildocs.models import Document, document_served
 
@@ -12,7 +13,7 @@ def serve(request, document_id, document_filename):
 
     # TODO: strip out weird characters like semicolons from the filename
     # (there doesn't seem to be an official way of escaping them)
-    response['Content-Disposition'] = 'attachment; filename=%s' % doc.filename
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(doc.filename)
     response['Content-Length'] = doc.file.size
 
     # Send document_served signal
